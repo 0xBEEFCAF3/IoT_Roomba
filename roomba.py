@@ -62,3 +62,4 @@ def power():
     write_num(133)
 
 turn_on()
+#safe_mode()
