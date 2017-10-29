@@ -1,10 +1,13 @@
-from flask import Flask, request
+from flask import Flask, request, send_from_directory
 from twilio.twiml.messaging_response import MessagingResponse
 from subprocess import call
 import time
 
 app = Flask(__name__)
 
+@app.route('/getImage')
+def getImage():
+    return send_from_directory('~/image.jpg')
 
 @app.route('/sms', methods=['POST'])
 def sms():
@@ -29,9 +32,15 @@ def sms():
         resp.message('Here are your stats boyo:')
     elif command == "photo":
         print("photo")
-        resp.message("Take a picture, it'll last longer ;)")
+        #resp.message("Take a picture, it'll last longer ;)")
         call(['bash', 'fswebcam ~/image.jpg'])
         time.sleep(3)
+        msg = Message()\
+                .body("Take a picture, it'll last longer ;)")\
+                .media("128.197.251.71/getImage")
+        resp.append(msg)
+        
+        
     elif command[:10] == "setdisplay":
         resp.message("Displaying your message, " + command[10:14])
     else:
