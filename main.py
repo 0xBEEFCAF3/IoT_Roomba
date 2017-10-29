@@ -1,5 +1,7 @@
 from flask import Flask, request
 from twilio.twiml.messaging_response import MessagingResponse
+from subprocess import call
+import time
 
 app = Flask(__name__)
 
@@ -28,6 +30,10 @@ def sms():
     elif command == "photo":
         print("photo")
         resp.message("Take a picture, it'll last longer ;)")
+        call(['bash', 'fswebcam ~/image.jpg'])
+        time.sleep(3)
+    elif command[:10] == "setdisplay":
+        resp.message("Displaying your message, " + command[10:14])
     else:
         print("What did you just send me??")
         resp.message('What did you just send me boyo?!')
