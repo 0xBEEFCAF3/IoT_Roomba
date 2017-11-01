@@ -3,7 +3,7 @@
 <h2>Commands </h2>
 
 <ul>
-  Send the fallowing to your Roomba
+  Send the following to your Roomba via text message
   <li> "Start" </li>
   <li> "Stop" </li>
   <li> "Dock" ;) </li>
